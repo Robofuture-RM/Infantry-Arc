@@ -12,8 +12,8 @@ MotorInfo_t chassis_motor[4];
 MotorInfo_t gimbal_motor_yaw;
 MotorInfo_t gimbal_motor_pitch;
 MotorInfo_t friction_wheel_motor[2];
-MotorInfo_t pluck_motor;
-MotorInfo_t cover_motor;
+MotorInfo_t trigger_motor;
+MotorInfo_t Magazine_motor;
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
@@ -135,12 +135,12 @@ MotorInfo_t* FrictionWheelMotor_2_Pointer(void)
     return &friction_wheel_motor[1];
 }
 
-MotorInfo_t* PluckMotor_Pointer(void)
+MotorInfo_t* TriggerMotor_Pointer(void)
 {
-    return &pluck_motor;
+    return &trigger_motor;
 }
 
 MotorInfo_t* MagazineMotor_Pointer(void)
 {
-    return &cover_motor;
+    return &Magazine_motor;
 }

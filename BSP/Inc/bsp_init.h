@@ -33,7 +33,6 @@ extern CAN_Object_t can2_obj;
 
 /* 函数声明 ------------------------------------------------------------------*/
 void BSP_Init(void);
-uint32_t BSP_GetTime_ms(void);
 
 #endif  // BSP_INIT_H
 

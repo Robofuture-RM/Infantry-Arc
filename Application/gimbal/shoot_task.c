@@ -47,7 +47,7 @@ static void Shoot_MagazineMotorCtrl(ShootHandle_t* handle);
 static void Shoot_TriggerMotorCtrl(ShootHandle_t* handle);
 static void Shoot_FrictionWheelMotorCtrl(ShootCtrlMode_e mode, FrictionWheelMotor_t motor[2]);
 
-static void ShootMotorSendCurrent(int16_t fric1_cur, int16_t fric2_cur, int16_t pluck_cur, int16_t hatch_cur);
+static void ShootMotorSendCurrent(int16_t fric1_cur, int16_t fric2_cur, int16_t trigger_cur, int16_t magazine_cur);
 
 /* 函数体 --------------------------------------------------------------------*/
 void ShootTask(void *argument)
@@ -95,7 +95,7 @@ void ShootTaskInit(void)
              1.0f, 0.0f, 3.0f);
     Blocked_Reset(&shoot_handle.magazine_motor.blocked_handle, 2000, 3000);
 
-    shoot_handle.trigger_motor.motor_info = PluckMotor_Pointer();
+    shoot_handle.trigger_motor.motor_info = TriggerMotor_Pointer();
     shoot_handle.trigger_state = TRIGGER_END;
     shoot_handle.trigger_motor.ecd_ratio = TRIGGER_MOTOR_POSITIVE_DIR * TRIGGER_MOTOR_REDUCTION_RATIO / ENCODER_ANGLE_RATIO;
     pid_init(&shoot_handle.trigger_motor.pid.outer_pid, POSITION_PID, 300.0f, 60.0f,
@@ -287,7 +287,7 @@ static void Shoot_FrictionWheelMotorCtrl(ShootCtrlMode_e mode, FrictionWheelMoto
 }
 
 
-static void ShootMotorSendCurrent(int16_t fric1_cur, int16_t fric2_cur, int16_t pluck_cur, int16_t hatch_cur)
+static void ShootMotorSendCurrent(int16_t fric1_cur, int16_t fric2_cur, int16_t trigger_cur, int16_t magazine_cur)
 {
-    Motor_SendMessage(shoot_handle.shoot_can, SHOOT_MOTOR_CONTROL_STD_ID, fric1_cur, fric2_cur, pluck_cur, hatch_cur);
+    Motor_SendMessage(shoot_handle.shoot_can, SHOOT_MOTOR_CONTROL_STD_ID, fric1_cur, fric2_cur, trigger_cur, magazine_cur);
 }

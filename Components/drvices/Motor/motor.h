@@ -67,7 +67,7 @@ MotorInfo_t* GimbalMotorYaw_Pointer(void);
 MotorInfo_t* GimbalMotorPitch_Pointer(void);
 MotorInfo_t* FrictionWheelMotor_1_Pointer(void);
 MotorInfo_t* FrictionWheelMotor_2_Pointer(void);
-MotorInfo_t* PluckMotor_Pointer(void);
+MotorInfo_t* TriggerMotor_Pointer(void);
 MotorInfo_t* MagazineMotor_Pointer(void);
 
 #endif  // MOTOR_H

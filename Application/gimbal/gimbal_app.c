@@ -66,8 +66,8 @@ void GimbalAppConfig(void)
     OfflineHandle_Init(OFFLINE_GIMBAL_YAW,              OFFLINE_ERROR_LEVEL,       100,         6);
     OfflineHandle_Init(OFFLINE_FRICTION_WHEEL_MOTOR1,   OFFLINE_ERROR_LEVEL,       100,         1);
     OfflineHandle_Init(OFFLINE_FRICTION_WHEEL_MOTOR2,   OFFLINE_ERROR_LEVEL,       100,         2);
-    OfflineHandle_Init(OFFLINE_PLUCK_MOTOR,             OFFLINE_ERROR_LEVEL,       100,         3);
-    OfflineHandle_Init(OFFLINE_COVER_MOTOR,             OFFLINE_ERROR_LEVEL,       100,         4);
+    OfflineHandle_Init(OFFLINE_TRIGGER_MOTOR,           OFFLINE_ERROR_LEVEL,       100,         3);
+    OfflineHandle_Init(OFFLINE_MAGAZINE_MOTOR,          OFFLINE_ERROR_LEVEL,       100,         4);
     OfflineHandle_Init(OFFLINE_REFEREE_SYSTEM,          OFFLINE_WARNING_LEVEL,     100,         1);
 //    OfflineHandle_Init(OFFLINE_CHASSIS_INFO,            OFFLINE_WARNING_LEVEL,     100,         2);
     OfflineHandle_Init(OFFLINE_DBUS,                    OFFLINE_WARNING_LEVEL,     100,         0);
@@ -164,15 +164,15 @@ static void CAN2_ReceiveCallback(uint32_t std_id, uint8_t *data, uint32_t dlc)
             Motor_DataParse(FrictionWheelMotor_2_Pointer(), data);
             OfflineHandle_TimeUpdate(OFFLINE_FRICTION_WHEEL_MOTOR2);
         }break;
-        case PLUCK_MOTOR_MESSAGE_ID:
+        case TRIGGER_MOTOR_MESSAGE_ID:
         {
-            Motor_DataParse(PluckMotor_Pointer(), data);
-            OfflineHandle_TimeUpdate(OFFLINE_PLUCK_MOTOR);
+            Motor_DataParse(TriggerMotor_Pointer(), data);
+            OfflineHandle_TimeUpdate(OFFLINE_TRIGGER_MOTOR);
         }break;
-        case COVER_MOTOR_MESSAGE_ID:
+        case MAGAZINE_MOTOR_MESSAGE_ID:
         {
             Motor_DataParse(MagazineMotor_Pointer(), data);
-            OfflineHandle_TimeUpdate(OFFLINE_COVER_MOTOR);
+            OfflineHandle_TimeUpdate(OFFLINE_MAGAZINE_MOTOR);
         }break;
         default:
             break;
