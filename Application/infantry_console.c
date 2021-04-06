@@ -251,11 +251,11 @@ static void Keyboard_Operation(void)
 
     if (console.rc->kb.bit.A)
     {
-        console.chassis.vy = chassis_vy * ramp_v0_calculate(&left_right_ramp);
+        console.chassis.vy = -chassis_vy * ramp_v0_calculate(&left_right_ramp);
     }
     else if(console.rc->kb.bit.D)
     {
-        console.chassis.vy = -chassis_vy * ramp_v0_calculate(&left_right_ramp);
+        console.chassis.vy = chassis_vy * ramp_v0_calculate(&left_right_ramp);
     }
     else
     {

@@ -8,20 +8,20 @@
 #include "fifo.h"
 
 /* 类型定义 ------------------------------------------------------------------*/
+/* CAN接收回调函数指针 */
 typedef void (*BSP_CAN_RxCallback_t)(uint32_t std_id, uint8_t* data, uint32_t dlc);
 
+/* CAN发送接收管理对象类型 */
 typedef struct 
 {
-    /* Handle */
-    CAN_HandleTypeDef* hcan;
-    /* Tx */
-    fifo_t tx_fifo;
-    uint8_t* tx_fifo_buffer;
-    uint8_t is_sending;
-    /* Rx */
-    BSP_CAN_RxCallback_t rx_callback;
+    CAN_HandleTypeDef* hcan;    /* Handle */
+    fifo_t tx_fifo;             /* 发送FIFO */
+    uint8_t* tx_fifo_buffer;    /* 发送FIFO缓存指针 */
+    uint8_t is_sending;         /* 发送状态 */
+    BSP_CAN_RxCallback_t rx_callback;     /* 接收函数指针 */
 }CAN_Object_t;
 
+/* CAN发送消息类型 */
 typedef struct
 {
     uint32_t std_id;
@@ -30,8 +30,8 @@ typedef struct
 }CAN_TxMsg_t;
 
 /* 宏定义 --------------------------------------------------------------------*/
-#define CAN_TX_FIFO_UNIT_NUM (256)
-#define CAN_TX_FIFO_SIZE (CAN_TX_FIFO_UNIT_NUM * sizeof(CAN_TxMsg_t))
+#define CAN_TX_FIFO_UNIT_NUM (256)      /* CAN发送FIFO单元数 */
+#define CAN_TX_FIFO_SIZE (CAN_TX_FIFO_UNIT_NUM * sizeof(CAN_TxMsg_t)) /* CAN发送FIFO缓存字节长 */
 
 /* 扩展变量 ------------------------------------------------------------------*/
 

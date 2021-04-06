@@ -2,7 +2,7 @@
  * Robofuture RM Team
  * File name: bsp_can.c
  * Author: Zhb        Version: 1.0        Date: 2021/3/12
- * Description: 对CAN的收发进行封装，实现快速的接收与发送操作，需在CubeMX中配置CAN
+ * Description: 对CAN的收发进行封装，实现快速方便的接收与发送操作，需在CubeMX中配置CAN
   *                             的接收与发送回调
  * Function List:
  *   1. BSP_CAN_NewObject 用于创建CAN收发管理对象

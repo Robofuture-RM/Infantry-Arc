@@ -2,7 +2,7 @@
  * Robofuture RM Team
  * File name: bsp_uart.c
  * Author: Zhb        Version: 1.0        Date: 2021/3/12
- * Description: 对UART的收发进行封装，实现快速的接收与发送操作，需在CubeMX中配置UART
+ * Description: 对UART的收发进行封装，实现快速方便的接收与发送操作，需在CubeMX中配置UART
   *                             的接收与发送回调
  * Function List:
  *   1. BSP_UART_NewObject 创建UART管理对象
@@ -149,7 +149,7 @@ BSP_Status_e BSP_UART_SetRxCallback(UART_Object_t* obj, UART_RxCallback_t fun)
  * Return: BSP_OK 配置成功
  *         BSP_ERROR 配置失败
 *************************************************/
-BSP_Status_e BSP_UART_WriteData(UART_HandleTypeDef *huart, uint8_t* data, uint16_t len)
+BSP_Status_e BSP_UART_WriteData(UART_HandleTypeDef* huart, uint8_t* data, uint16_t len)
 {
     if(huart == NULL)
         return BSP_ERROR;

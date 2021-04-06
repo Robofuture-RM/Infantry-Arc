@@ -17,6 +17,13 @@ MotorInfo_t Magazine_motor;
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
+/*************************************************
+ * Function: Motor_EncoderData
+ * Description: 电机编码器数据解析
+ * Input: ptr 电机信息指针
+ *        data 数据指针
+ * Return: 无
+*************************************************/
 static void Motor_EncoderData(MotorInfo_t* ptr, uint8_t data[])
 {
     ptr->last_ecd = ptr->ecd;
@@ -46,13 +53,26 @@ static void Motor_EncoderData(MotorInfo_t* ptr, uint8_t data[])
     ptr->temperature = data[6];
 }
 
+/*************************************************
+ * Function: Motor_EncoderOffset
+ * Description: 电机编码器补偿
+ * Input: ptr 电机信息指针
+ *        data 数据指针
+ * Return: 无
+*************************************************/
 static void Motor_EncoderOffset(MotorInfo_t* ptr, uint8_t data[])
 {
     ptr->ecd        = (uint16_t)(data[0] << 8 | data[1]);
     ptr->offset_ecd = ptr->ecd;
 }
 
-/* 电调返回数据处理 */
+/*************************************************
+ * Function: Motor_DataParse
+ * Description: 电机编码器数据处理
+ * Input: ptr 电机信息指针
+ *        data 数据指针
+ * Return: 无
+*************************************************/
 void Motor_DataParse(MotorInfo_t *ptr, uint8_t data[])
 {
     if (ptr == NULL)
@@ -68,27 +88,44 @@ void Motor_DataParse(MotorInfo_t *ptr, uint8_t data[])
     Motor_EncoderData(ptr, data);
 }
 
-int16_t Motor_RelativePosition(int16_t ecd, int16_t center_offset)
+/*************************************************
+ * Function: Motor_RelativePosition
+ * Description: 电机编码器绝对位置计算
+ * Input: ecd 编码器值
+ *        offset 补偿
+ * Return: 无
+*************************************************/
+int16_t Motor_RelativePosition(int16_t ecd, int16_t offset)
 {
     int16_t tmp = 0;
-    if (center_offset >= MOTOR_ENCODER_RANGE_HALF)
+    if (offset >= MOTOR_ENCODER_RANGE_HALF)
     {
-        if (ecd > center_offset - MOTOR_ENCODER_RANGE_HALF)
-            tmp = ecd - center_offset;
+        if (ecd > offset - MOTOR_ENCODER_RANGE_HALF)
+            tmp = ecd - offset;
         else
-            tmp = ecd + MOTOR_ENCODER_RANGE - center_offset;
+            tmp = ecd + MOTOR_ENCODER_RANGE - offset;
     }
     else
     {
-        if (ecd > center_offset + MOTOR_ENCODER_RANGE_HALF)
-            tmp = ecd - MOTOR_ENCODER_RANGE - center_offset;
+        if (ecd > offset + MOTOR_ENCODER_RANGE_HALF)
+            tmp = ecd - MOTOR_ENCODER_RANGE - offset;
         else
-            tmp = ecd - center_offset;
+            tmp = ecd - offset;
     }
     return tmp;
 }
 
-/* 发送电机数据 */
+/*************************************************
+ * Function: Motor_SendMessage
+ * Description: 电机控制数据发送
+ * Input: obj CAN对象指针
+ *        std_id CAN发送标识符
+ *        cur1 电机1电流值
+ *        cur2 电机2电流值
+ *        cur3 电机3电流值
+ *        cur4 电机4电流值
+ * Return: 无
+*************************************************/
 void Motor_SendMessage(CAN_Object_t *obj, uint32_t std_id, int16_t cur1, int16_t cur2, int16_t cur3, int16_t cur4)
 {
     uint8_t TxData[8] = {0};
@@ -103,7 +140,12 @@ void Motor_SendMessage(CAN_Object_t *obj, uint32_t std_id, int16_t cur1, int16_t
     BSP_CAN_TransmitData(obj, std_id, TxData, 8);
 }
 
-/* 电机快速设置ID */
+/*************************************************
+ * Function: Motor_QuicklySetID
+ * Description: 快速设置电机ID
+ * Input: obj CAN对象指针
+ * Return: 无
+*************************************************/
 void Motor_QuicklySetID(CAN_Object_t *obj)
 {
     uint8_t TxData[8] = {0};

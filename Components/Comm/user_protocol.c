@@ -16,6 +16,14 @@ Comm_GimbalInfo_t gimbal_info;
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
+/*************************************************
+ * Function: UserProtocol_ParseHandler
+ * Description: 用户自定义数据解析处理
+ * Input: cmd_id 协议命令码
+ *        data 数据指针
+ *        len 数据长度
+ * Return: 无
+*************************************************/
 void UserProtocol_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len)
 {
     switch(cmd_id)
@@ -40,11 +48,23 @@ void UserProtocol_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len)
     }
 }
 
+/*************************************************
+ * Function: ChassisInfo_Pointer
+ * Description: 获取底盘信息数据
+ * Input: 无
+ * Return: 底盘信息数据指针
+*************************************************/
 Comm_ChassisInfo_t* ChassisInfo_Pointer(void)
 {
     return &chassis_info;
 }
 
+/*************************************************
+ * Function: GimbalInfo_Pointer
+ * Description: 获取云台信息数据
+ * Input: 无
+ * Return: 云台信息数据指针
+*************************************************/
 Comm_GimbalInfo_t* GimbalInfo_Pointer(void)
 {
     return &gimbal_info;

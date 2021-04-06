@@ -14,12 +14,25 @@
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
+/*************************************************
+ * Function: GetTime_ms
+ * Description: 获取系统时间
+ * Input: 无
+ * Return: 系统时间
+*************************************************/
 static uint32_t GetTime_ms(void)
 {
     return HAL_GetTick();
 }
 
-
+/*************************************************
+ * Function: Blocked_Reset
+ * Description: 堵转处理句柄复位
+ * Input: handle 堵转处理句柄
+ *        blocked_timer 堵转时间
+ *        guard_timer 堵转保护时间
+ * Return: 无
+*************************************************/
 void Blocked_Reset(BlockedHandle_t* handle, uint32_t blocked_timer, uint32_t guard_timer)
 {
     handle->start_time = 0;
@@ -28,6 +41,13 @@ void Blocked_Reset(BlockedHandle_t* handle, uint32_t blocked_timer, uint32_t gua
     handle->guard_timer = guard_timer;
 }
 
+/*************************************************
+ * Function: Blocked_Process
+ * Description: 堵转处理进程
+ * Input: handle 堵转处理句柄
+ *        speed 电机速度
+ * Return: 无
+*************************************************/
 BlockedState_t Blocked_Process(BlockedHandle_t* handle, fp32 speed)
 {
     uint32_t time_now = GetTime_ms();

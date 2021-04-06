@@ -1,6 +1,22 @@
+/*******************************************************************************
+ * Robofuture RM Team
+ * File name: pid.c
+ * Author: Zhb        Version: 1.0        Date: 2021/4/6
+ * Description: 实现pid算法
+ * Function List:
+ *   1. pid_init pid参数初始化
+ *   2. pid_calc pid算法计算
+ *   3. pid_clear 清除pid计算数据
+ *   4. DoublePID_Calc 双环pid计算
+ * History:
+ *      <author> <time>  <version > <desc>
+ *        Zhb   21/04/06  1.0       首次提交
+*******************************************************************************/
+
 /* 包含头文件 ----------------------------------------------------------------*/
 #include "pid.h"
 #include <math.h>
+#include "user_lib.h"
 
 /* 私有类型定义 --------------------------------------------------------------*/
 
@@ -13,16 +29,29 @@
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
-static void abs_limit(float *a, float ABS_MAX)
-{
-    if (*a > ABS_MAX)
-        *a = ABS_MAX;
-    if (*a < -ABS_MAX)
-        *a = -ABS_MAX;
-}
+//static void abs_limit(float *a, float ABS_MAX)
+//{
+//    if (*a > ABS_MAX)
+//        *a = ABS_MAX;
+//    if (*a < -ABS_MAX)
+//        *a = -ABS_MAX;
+//}
 
+/*************************************************
+ * Function: pid_param_init
+ * Description: pid参数初始化
+ * Input: pid pid指针
+ *        mode pid算法类型，可选： POSITION_PID位置式，
+ *                               DELTA_PID增量式
+ *        maxout 最大输出
+ *        intergral_limit 积分最大限幅
+ *        kp 比例系数
+ *        ki 积分系数
+ *        kd 微分系数
+ * Return: 无
+*************************************************/
 static void pid_param_init(
-    pid_t*   pid,
+    pid_t* pid,
     int   mode,
     float maxout,
     float intergral_limit,
@@ -40,13 +69,17 @@ static void pid_param_init(
     pid->d = kd;
 
 }
-/**
-  * @brief     modify pid parameter when code running
-  * @param[in] pid: control pid struct
-  * @param[in] p/i/d: pid parameter
-  * @retval    none
-  */
-static void pid_reset(pid_t *pid, float kp, float ki, float kd)
+
+/*************************************************
+ * Function: pid_reset
+ * Description: pid参数修改
+ * Input: pid pid指针
+ *        kp 比例系数
+ *        ki 积分系数
+ *        kd 微分系数
+ * Return: 无
+*************************************************/
+static void pid_reset(pid_t* pid, float kp, float ki, float kd)
 {
     pid->p = kp;
     pid->i = ki;
@@ -59,14 +92,15 @@ static void pid_reset(pid_t *pid, float kp, float ki, float kd)
 
 }
 
-/**
-  * @brief     calculate delta PID and position PID
-  * @param[in] pid: control pid struct
-  * @param[in] get: measure feedback value
-  * @param[in] set: target value
-  * @retval    pid calculate output
-  */
-float pid_calc(pid_t *pid, float get, float set)
+/*************************************************
+ * Function: pid_calc
+ * Description: pid计算
+ * Input: pid pid指针
+ *        get 测量反馈值
+ *        set 目标值
+ * Return: pid计算输出值
+*************************************************/
+float pid_calc(pid_t* pid, float get, float set)
 {
     pid->get = get;
     pid->set = set;
@@ -105,11 +139,13 @@ float pid_calc(pid_t *pid, float get, float set)
         return pid->out;
 }
 
-/**
-  * @brief     clear pid out
-  * @retval    none
-  */
-void pid_clear(pid_t *pid)
+/*************************************************
+ * Function: pid_clear
+ * Description: 清除pid计算值
+ * Input: pid pid指针
+ * Return: 无
+*************************************************/
+void pid_clear(pid_t* pid)
 {
     if (pid == NULL)
     {
@@ -121,15 +157,24 @@ void pid_clear(pid_t *pid)
     pid->get = pid->set = 0.0f;
 }
 
-/**
-  * @brief     initialize pid parameter
-  * @retval    none
-  */
+/*************************************************
+ * Function: pid_init
+ * Description: pid初始化
+ * Input: pid pid指针
+ *        mode pid算法类型，可选： POSITION_PID位置式，
+ *                               DELTA_PID增量式
+ *        maxout 最大输出
+ *        intergral_limit 积分最大限幅
+ *        kp 比例系数
+ *        ki 积分系数
+ *        kd 微分系数
+ * Return: 无
+*************************************************/
 void pid_init(
-    pid_t*   pid,
-    int mode,
-    float maxout,
-    float intergral_limit,
+    pid_t* pid,
+    int    mode,
+    float  maxout,
+    float  intergral_limit,
 
     float kp,
     float ki,
@@ -139,6 +184,15 @@ void pid_init(
     pid_reset(pid, kp, ki, kd);
 }
 
+/*************************************************
+ * Function: DoublePID_Calc
+ * Description: 双环串级pid计算
+ * Input: dpid 双环pid指针
+ *        outer_ref 外环目标值
+ *        outer_fdb 外环反馈值
+ *        inter_fdb 内环反馈值
+ * Return: 无
+*************************************************/
 float DoublePID_Calc(Double_PID_t* dpid, float outer_ref, float outer_fdb, float inter_fdb)
 {
     dpid->outer_ref = outer_ref;

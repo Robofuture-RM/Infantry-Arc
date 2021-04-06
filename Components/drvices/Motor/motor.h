@@ -57,10 +57,10 @@ typedef struct
 /* 扩展变量 ------------------------------------------------------------------*/
 
 /* 函数声明 ------------------------------------------------------------------*/
-void Motor_DataParse(MotorInfo_t *ptr, uint8_t data[]);
+void Motor_DataParse(MotorInfo_t* ptr, uint8_t data[]);
 int16_t Motor_RelativePosition(int16_t ecd, int16_t center_offset);
-void Motor_SendMessage(CAN_Object_t *obj, uint32_t std_id, int16_t cur1, int16_t cur2, int16_t cur3, int16_t cur4);
-void Motor_QuicklySetID(CAN_Object_t *obj);
+void Motor_SendMessage(CAN_Object_t* obj, uint32_t std_id, int16_t cur1, int16_t cur2, int16_t cur3, int16_t cur4);
+void Motor_QuicklySetID(CAN_Object_t* obj);
 
 MotorInfo_t* ChassisMotor_Pointer(uint8_t i);
 MotorInfo_t* GimbalMotorYaw_Pointer(void);

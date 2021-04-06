@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Robofuture RM Team
+ * File name: crc.c
+ * Author: Zhb        Version: 1.0        Date: 2021/4/6
+ * Description: crc校验
+ * Function List:
+ *   1. get_crc8_check_sum 计算crc8校验值
+ *   2. verify_crc8_check_sum 检查crc8校验码
+ *   3. append_crc8_check_sum 在数据末添加crc8校验
+ *   4. get_crc16_check_sum 计算crc16校验值
+ *   5. verify_crc16_check_sum 检查crc16校验码
+ *   6. append_crc16_check_sum 在数据末添加crc16校验
+ * History:
+ *      <author> <time>  <version > <desc>
+ *        Zhb   21/04/06  1.0       首次提交
+*******************************************************************************/
+
 /* 包含头文件 ----------------------------------------------------------------*/
 #include "crc.h"
 

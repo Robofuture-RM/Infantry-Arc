@@ -347,7 +347,7 @@ typedef struct      //飞镖机器人客户端指令数据：0x020A。发送频�
 /* 扩展变量 ------------------------------------------------------------------*/
 
 /* 函数声明 ------------------------------------------------------------------*/
-void RefereeSystem_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len);
+void RefereeSystem_ParseHandler(uint16_t cmd_id, uint8_t* data, uint16_t len);
 uint8_t RefereeSystem_GetRobotID(void);
 ext_game_robot_state_t* RefereeSystem_RobotState_Pointer(void);
 ext_power_heat_data_t* RefereeSystem_PowerHeatData_Pointer(void);

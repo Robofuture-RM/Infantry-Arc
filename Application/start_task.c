@@ -18,7 +18,6 @@ static uint32_t start_task_stack = 0;
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
-
 /**
   * @brief  Function implementing the startTask thread.
   * @param  argument: Not used

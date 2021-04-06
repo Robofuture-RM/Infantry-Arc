@@ -10,24 +10,27 @@
 #endif
 
 /* 类型定义 ------------------------------------------------------------------*/
+/* GPIO外部中断回调函数指针 */
 typedef void (*GPIO_EXIT_Callback_t)(void);
 
+/* GPIO设备种类枚举  */
 typedef enum
 {
-    GPIO_EMPTY_DEV = 0,
-    GPIO_OUTPUT_PP_DEV,
-    GPIO_OUTPUT_OD_DEV,
-    GPIO_INPUT_DEV,
-    GPIO_PWM_DEV,
-    GPIO_EXTI_DEV,
+    GPIO_EMPTY_DEV = 0,     /* 未定义GPIO设备  */
+    GPIO_OUTPUT_PP_DEV,     /* GPIO推挽输出设备  */
+    GPIO_OUTPUT_OD_DEV,     /* GPIO开漏输出设备  */
+    GPIO_INPUT_DEV,         /* GPIO输入设备  */
+    GPIO_PWM_DEV,           /* PWM设备  */
+    GPIO_EXTI_DEV,          /* GPIO外部中断设备 */
 } GPIO_Device_e;
 
+/* GPIO管理对象  */
 typedef struct
 {
-    void* handle;
-    uint32_t value;
-    GPIO_Device_e device;
-    GPIO_EXIT_Callback_t callback;
+    void* handle;       /* 根据类型保存指针  */
+    uint32_t value;     /* 根据类型保存控制值  */
+    GPIO_Device_e device;       /* 设备类型  */
+    GPIO_EXIT_Callback_t callback;      /* 外部中断  */
 } GPIO_Object_t;
 
 /* 宏定义 --------------------------------------------------------------------*/

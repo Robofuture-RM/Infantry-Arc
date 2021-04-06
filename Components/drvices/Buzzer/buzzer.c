@@ -15,12 +15,25 @@ static uint16_t beep_off_time = BEEP_OFF_TIME;
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
+/*************************************************
+ * Function: Buzzer_SetBeep
+ * Description: 设置蜂鸣器音调
+ * Input: tune 曲调
+ *        value pwm占空比
+ * Return: 无
+*************************************************/
 void Buzzer_SetBeep(uint16_t tune, uint16_t value)
 {
     ((TIM_HandleTypeDef *)buzzer_gpio.handle)->Instance->ARR = tune;
     BSP_GPIO_SetPwmValue(&buzzer_gpio, value);
 }
 
+/*************************************************
+ * Function: BeepHandler
+ * Description: 蜂鸣器控制器
+ * Input: 无
+ * Return: 无
+*************************************************/
 void BeepHandler(void)
 {
     static uint32_t beep_tick;
@@ -58,11 +71,24 @@ void BeepHandler(void)
     }
 }
 
+/*************************************************
+ * Function: BeepTimesSet
+ * Description: 设置蜂鸣器鸣叫次数
+ * Input: times 次数
+ * Return: 无
+*************************************************/
 void BeepTimesSet(uint8_t times)
 {
     beep_times = times;
 }
 
+/*************************************************
+ * Function: BeepTimeSet_ON_OFF
+ * Description: 蜂鸣器开关时间设置
+ * Input: on_time 打开时间
+ *        off_time 关闭时间
+ * Return: 无
+*************************************************/
 void BeepTimeSet_ON_OFF(uint16_t on_time, uint16_t off_time)
 {
     beep_on_time = on_time;

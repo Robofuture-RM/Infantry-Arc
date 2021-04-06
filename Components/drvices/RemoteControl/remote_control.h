@@ -107,8 +107,8 @@ typedef struct
 /* 扩展变量 ------------------------------------------------------------------*/
 
 /* 函数声明 ------------------------------------------------------------------*/
-void RC_DataParser(RC_Info_t *rc, uint8_t *buf, uint16_t len);
-void RC_SwitchAction(RC_Switch_t *sw, uint8_t value);
+void RC_DataParser(RC_Info_t* rc, uint8_t* buf, uint16_t len);
+void RC_SwitchAction(RC_Switch_t* sw, uint8_t value);
 RC_Info_t* RC_GetDataPointer(void);
 
 #endif  // REMOTE_CONTROL_H

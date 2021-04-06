@@ -26,8 +26,8 @@ typedef enum
     STEP_DATA_CRC16  = 5,
 } UnpackStep_e;
 
-typedef void (*UnpackHookFunc_t)(uint16_t cmd_id, uint8_t *data, uint16_t len);
-typedef void (*TransmitHookFunc_t)(uint8_t *data, uint16_t len);
+typedef void (*UnpackHookFunc_t)(uint16_t cmd_id, uint8_t* data, uint16_t len);
+typedef void (*TransmitHookFunc_t)(uint8_t* data, uint16_t len);
 typedef uint16_t (*GetPortFreeLength)(void);
 
 #define PROTOCOL_FRAME_MAX_SIZE    128
@@ -63,11 +63,11 @@ typedef struct
 /* 扩展变量 ------------------------------------------------------------------*/
 
 /* 函数声明 ------------------------------------------------------------------*/
-void Comm_ReceiveInit(ReceiveHandle_t* p_handle, uint8_t header_sof, uint8_t *rx_fifo_buffer, uint16_t rx_fifo_size, UnpackHookFunc_t func);
-void Comm_ReceiveData(ReceiveHandle_t* p_handle, uint8_t *p_data, uint16_t len);
+void Comm_ReceiveInit(ReceiveHandle_t* p_handle, uint8_t header_sof, uint8_t* rx_fifo_buffer, uint16_t rx_fifo_size, UnpackHookFunc_t func);
+void Comm_ReceiveData(ReceiveHandle_t* p_handle, uint8_t* p_data, uint16_t len);
 void Comm_ReceiveDataHandler(void);
-void Comm_TransmitInit(TransmitHandle_t* p_handle, uint8_t *tx_fifo_buffer, uint16_t tx_fifo_size, TransmitHookFunc_t func);
-void Comm_TransmitData(TransmitHandle_t* p_handle, uint8_t header_sof, uint16_t cmd_id, uint8_t *p_data, uint16_t len);
+void Comm_TransmitInit(TransmitHandle_t* p_handle, uint8_t* tx_fifo_buffer, uint16_t tx_fifo_size, TransmitHookFunc_t func);
+void Comm_TransmitData(TransmitHandle_t* p_handle, uint8_t header_sof, uint16_t cmd_id, uint8_t* p_data, uint16_t len);
 void Comm_TransmitDataHandler(void);
 
 #endif  // PROTOCOL_H

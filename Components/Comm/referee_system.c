@@ -30,7 +30,15 @@ ext_bullet_remaining_t bullet_remaining_t;
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
-void RefereeSystem_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len)
+/*************************************************
+ * Function: RefereeSystem_ParseHandler
+ * Description: 裁判系统数据解析处理
+ * Input: cmd_id 协议命令码
+ *        data 数据指针
+ *        len 数据长度
+ * Return: 无
+*************************************************/
+void RefereeSystem_ParseHandler(uint16_t cmd_id, uint8_t* data, uint16_t len)
 {
     switch(cmd_id)
     {
@@ -111,16 +119,34 @@ void RefereeSystem_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len)
     }
 }
 
+/*************************************************
+ * Function: RefereeSystem_GetRobotID
+ * Description: 获取机器人ID
+ * Input: 无
+ * Return: 机器人ID robot_id_t
+*************************************************/
 uint8_t RefereeSystem_GetRobotID(void)
 {
     return robot_state.robot_id;
 }
 
+/*************************************************
+ * Function: RefereeSystem_RobotState_Pointer
+ * Description: 获取机器人状态
+ * Input: 无
+ * Return: 机器人状态指针
+*************************************************/
 ext_game_robot_state_t* RefereeSystem_RobotState_Pointer(void)
 {
     return &robot_state;
 }
 
+/*************************************************
+ * Function: RefereeSystem_PowerHeatData_Pointer
+ * Description: 获取机器人功率热量数据
+ * Input: 无
+ * Return: 机器人功率热量数据指针
+*************************************************/
 ext_power_heat_data_t* RefereeSystem_PowerHeatData_Pointer(void)
 {
     return &power_heat_data_t;

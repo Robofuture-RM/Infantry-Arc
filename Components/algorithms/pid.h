@@ -53,8 +53,8 @@ typedef struct
 
 /* 函数声明 ------------------------------------------------------------------*/
 void pid_init(pid_t* pid, int mode, float maxout, float intergral_limit, float kp, float ki, float kd);
-float pid_calc(pid_t *pid, float get, float set);
-void pid_clear(pid_t *pid);
+float pid_calc(pid_t* pid, float get, float set);
+void pid_clear(pid_t* pid);
 float DoublePID_Calc(Double_PID_t* dpid, float outer_ref, float outer_fdb, float inter_fdb);
 
 #endif  // __PID_H__
