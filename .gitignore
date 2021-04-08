@@ -61,7 +61,7 @@ dkms.conf
 # used for STM32CubeIDE Project
 *.settings/
 
-# used for Robomaster Project
+# Robomaster
 !AHRS.lib
-!arm_cortexM4lf_math.lib
+#!arm_cortexM4lf_math.lib
 !libarm_cortexM4lf_math.a
