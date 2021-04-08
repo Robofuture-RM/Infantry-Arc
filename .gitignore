@@ -59,6 +59,7 @@ dkms.conf
 *.bin
 
 # used for STM32CubeIDE Project
+*.settings/
 
 # used for Robomaster Project
 !AHRS.lib
