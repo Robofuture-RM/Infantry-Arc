@@ -116,7 +116,7 @@ void Chassis_LimitPower(ChassisHandle_t* chassis_handle)
     {
         chassis_power = RefereeSystem_PowerHeatData_Pointer()->chassis_power;
         chassis_power_buffer = RefereeSystem_PowerHeatData_Pointer()->chassis_power_buffer;
-        max_chassis_power = RefereeSystem_RobotState_Pointer()->max_chassis_power;
+        max_chassis_power = RefereeSystem_RobotState_Pointer()->chassis_power_limit;
         if(chassis_power_buffer < WARNING_POWER_BUFF)
         {
             fp32 power_scale;

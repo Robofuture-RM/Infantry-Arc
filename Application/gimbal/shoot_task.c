@@ -129,9 +129,9 @@ static void ShootSensorUpdata(void)
 
     if (!CheckDeviceIsOffline(OFFLINE_REFEREE_SYSTEM))
     {
-        shoot_handle.shooter_heat_cooling_rate = RefereeSystem_RobotState_Pointer()->shooter_heat0_cooling_rate;
-        shoot_handle.shooter_heat_cooling_limit = RefereeSystem_RobotState_Pointer()->shooter_heat0_cooling_limit;
-        shoot_handle.shooter_heat = RefereeSystem_PowerHeatData_Pointer()->shooter_heat0;
+        shoot_handle.shooter_heat_cooling_rate = RefereeSystem_RobotState_Pointer()->shooter_id1_17mm_cooling_rate;
+        shoot_handle.shooter_heat_cooling_limit = RefereeSystem_RobotState_Pointer()->shooter_id1_17mm_cooling_limit;
+        shoot_handle.shooter_heat = RefereeSystem_PowerHeatData_Pointer()->shooter_id1_17mm_cooling_heat;
     }
     else
     {
