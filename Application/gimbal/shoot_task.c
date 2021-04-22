@@ -34,7 +34,8 @@ static uint32_t shoot_task_stack = 0;
 
 ShootHandle_t shoot_handle;
 
-uint16_t friction_wheel_speed = 7000; //4900-16.7m/s  5900-20m/s    7000-24m/s      8000-25m/s
+uint16_t shoot_speed_limit[3] = {15, 18, 30};
+uint16_t friction_wheel_speed[3] = {3800, 5000, 7000}; //4900-16.7m/s  5900-20m/s    7000-24m/s      8000-25m/s
 /* 扩展变量 ------------------------------------------------------------------*/
 extern CAN_Object_t can2_obj;
 
@@ -131,6 +132,7 @@ static void ShootSensorUpdata(void)
     {
         shoot_handle.shooter_heat_cooling_rate = RefereeSystem_RobotState_Pointer()->shooter_id1_17mm_cooling_rate;
         shoot_handle.shooter_heat_cooling_limit = RefereeSystem_RobotState_Pointer()->shooter_id1_17mm_cooling_limit;
+        shoot_handle.shooter_speed_limit = RefereeSystem_RobotState_Pointer()->shooter_id1_17mm_speed_limit;
         shoot_handle.shooter_heat = RefereeSystem_PowerHeatData_Pointer()->shooter_id1_17mm_cooling_heat;
     }
     else
@@ -203,7 +205,7 @@ static void Shoot_MagazineMotorCtrl(ShootHandle_t* handle)
 
 static void Shoot_TriggerMotorCtrl(ShootHandle_t* handle)
 {
-    static uint8_t max_bullet_nums = 0;
+    static int8_t max_bullet_nums = 0;
     static uint32_t reverse_time = 0;
     if (handle->ctrl_mode == SHOOT_START)
     {
@@ -271,8 +273,14 @@ static void Shoot_FrictionWheelMotorCtrl(ShootCtrlMode_e mode, FrictionWheelMoto
 {
     if (mode == SHOOT_START)
     {
-        motor[0].set_speed =-friction_wheel_speed;
-        motor[1].set_speed = friction_wheel_speed;
+        for (uint8_t i = 0; i<3; i++)
+        {
+            if (shoot_speed_limit[i]  == shoot_handle.shooter_speed_limit)
+            {
+                motor[0].set_speed =-friction_wheel_speed[i];
+                motor[1].set_speed = friction_wheel_speed[i];
+            }
+        }
     }
     else
     {

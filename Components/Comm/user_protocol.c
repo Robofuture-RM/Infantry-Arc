@@ -24,7 +24,7 @@ Comm_GimbalInfo_t gimbal_info;
  *        len 数据长度
  * Return: 无
 *************************************************/
-void UserProtocol_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len)
+void UserProtocol_ParseHandler(uint16_t cmd_id, uint8_t* data, uint16_t len)
 {
     switch(cmd_id)
     {

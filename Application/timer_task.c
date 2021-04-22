@@ -20,7 +20,7 @@ SoftwareTimer_t soft_timer[TIMER_ELEMENT_NUM_MAX + 1];
 /* 私有函数原形 --------------------------------------------------------------*/
 
 /* 函数体 --------------------------------------------------------------------*/
-void SoftwareTimerTask(void *argument)
+void SoftwareTimerTask(void* argument)
 {
     uint32_t period = osKernelSysTick();
 

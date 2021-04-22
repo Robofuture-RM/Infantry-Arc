@@ -36,10 +36,10 @@ typedef struct
     list_t          list;
     fifo_s_t        fifo;
     uint8_t         header_sof;
-    uint16_t        data_len;
-    uint8_t         protocol_packet[PROTOCOL_FRAME_MAX_SIZE];
     UnpackStep_e    unpack_step;
     uint16_t        index;
+    uint16_t        data_len;
+    uint8_t         protocol_packet[PROTOCOL_FRAME_MAX_SIZE];
     UnpackHookFunc_t func;
 } ReceiveHandle_t;
 

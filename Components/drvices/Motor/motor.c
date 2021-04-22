@@ -126,7 +126,7 @@ int16_t Motor_RelativePosition(int16_t ecd, int16_t offset)
  *        cur4 电机4电流值
  * Return: 无
 *************************************************/
-void Motor_SendMessage(CAN_Object_t *obj, uint32_t std_id, int16_t cur1, int16_t cur2, int16_t cur3, int16_t cur4)
+void Motor_SendMessage(CAN_Object_t* obj, uint32_t std_id, int16_t cur1, int16_t cur2, int16_t cur3, int16_t cur4)
 {
     uint8_t TxData[8] = {0};
     TxData[0] = (uint8_t)(cur1 >> 8);
@@ -146,7 +146,7 @@ void Motor_SendMessage(CAN_Object_t *obj, uint32_t std_id, int16_t cur1, int16_t
  * Input: obj CAN对象指针
  * Return: 无
 *************************************************/
-void Motor_QuicklySetID(CAN_Object_t *obj)
+void Motor_QuicklySetID(CAN_Object_t* obj)
 {
     uint8_t TxData[8] = {0};
     BSP_CAN_TransmitData(obj, 0x700, TxData, 8);

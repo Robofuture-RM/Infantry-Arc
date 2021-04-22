@@ -38,7 +38,7 @@ typedef struct
 /* 扩展变量 ------------------------------------------------------------------*/
 
 /* 函数声明 ------------------------------------------------------------------*/
-void UserProtocol_ParseHandler(uint16_t cmd_id, uint8_t *data, uint16_t len);
+void UserProtocol_ParseHandler(uint16_t cmd_id, uint8_t* data, uint16_t len);
 Comm_ChassisInfo_t* ChassisInfo_Pointer(void);
 Comm_GimbalInfo_t* GimbalInfo_Pointer(void);
 

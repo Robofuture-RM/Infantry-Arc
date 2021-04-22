@@ -73,6 +73,7 @@ typedef struct
 
     uint16_t        shooter_heat_cooling_rate;
     uint16_t        shooter_heat_cooling_limit;
+    uint16_t        shooter_speed_limit;
     uint16_t        shooter_heat;
 } ShootHandle_t;
 

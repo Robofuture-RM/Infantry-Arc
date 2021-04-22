@@ -274,6 +274,10 @@ static void Keyboard_Operation(void)
         {
             console.shoot_cmd = SHOOT_START_CMD;
         }
+        else if (!last_rc.mouse.l && console.rc->mouse.l)
+        {
+            console.shoot_cmd = SHOOT_START_CMD;
+        }
     }
     else if (console.shoot_cmd == SHOOT_START_CMD)
     {

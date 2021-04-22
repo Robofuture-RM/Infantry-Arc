@@ -181,7 +181,7 @@ static uint16_t Comm_Pack(TransmitHandle_t* p_handle, uint8_t sof, uint16_t cmd_
 
     p_header->sof          = sof;
     p_header->data_length  = len;
-    p_header->seq          = p_handle->seq++;
+//    p_header->seq          = p_handle->seq++;
     memcpy(p_handle->protocol_packet + PROTOCOL_HEADER_SIZE, (uint8_t*)&cmd_id, PROTOCOL_CMD_SIZE);
     append_crc8_check_sum(p_handle->protocol_packet, PROTOCOL_HEADER_SIZE);
     memcpy(p_handle->protocol_packet + PROTOCOL_HEADER_SIZE + PROTOCOL_CMD_SIZE, p_data, len);
@@ -204,7 +204,7 @@ void Comm_ReceiveInit(ReceiveHandle_t* p_handle, uint8_t header_sof, uint8_t* rx
 {
     if (p_handle == NULL)
         return;
-    list_t *cur;
+    list_t* cur;
     list_for_each_prev(cur, &receive_head)
     {
         if (cur == &p_handle->list)
@@ -242,7 +242,7 @@ void Comm_ReceiveData(ReceiveHandle_t* p_handle, uint8_t* p_data, uint16_t len)
 void Comm_ReceiveDataHandler(void)
 {
     ReceiveHandle_t* p_handle;
-    list_t *cur_pos;
+    list_t* cur_pos;
     list_for_each_prev(cur_pos, &receive_head)
     {
         p_handle = (ReceiveHandle_t *)cur_pos;
@@ -263,7 +263,7 @@ void Comm_TransmitInit(TransmitHandle_t* p_handle, uint8_t* tx_fifo_buffer, uint
 {
     if (p_handle == NULL)
         return;
-    list_t *cur;
+    list_t* cur;
     list_for_each_prev(cur, &transmit_head)
     {
         if (cur == &p_handle->list)
@@ -292,7 +292,7 @@ void Comm_TransmitData(TransmitHandle_t* p_handle, uint8_t header_sof, uint16_t 
     if (fifo_s_free(&p_handle->fifo) > len)
     {
         uint16_t frame_length = Comm_Pack(p_handle, header_sof, cmd_id, p_data, len);
-        fifo_s_puts(&p_handle->fifo, (char *)p_handle->protocol_packet, frame_length);
+        fifo_s_puts(&p_handle->fifo, (char*)p_handle->protocol_packet, frame_length);
     }
 }
 
@@ -313,7 +313,7 @@ void Comm_TransmitDataHandler(void)
 
     list_for_each_prev(cur_pos, &transmit_head)
     {
-        p_handle = (TransmitHandle_t *)cur_pos;
+        p_handle = (TransmitHandle_t*)cur_pos;
         used_len = fifo_s_used(&p_handle->fifo);
         if (used_len)
         {

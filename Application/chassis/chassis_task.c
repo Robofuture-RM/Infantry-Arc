@@ -159,6 +159,11 @@ static void ChassisSpinMode(void)
 {
     chassis_handle.vx = chassis_handle.console->chassis.vx;
     chassis_handle.vy = chassis_handle.console->chassis.vy;
-    chassis_handle.vw = 100;
+    if (fabs(chassis_handle.vx) < 500 && fabs(chassis_handle.vy) < 500)
+        chassis_handle.vw = 200;
+    else if (fabs(chassis_handle.vx) < 1000 && fabs(chassis_handle.vy) < 1000)
+        chassis_handle.vw = 100;
+    else
+        chassis_handle.vw = 0;
 }
 
